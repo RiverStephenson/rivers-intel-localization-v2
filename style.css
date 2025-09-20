@@ -120,8 +120,8 @@ body {
   align-items: start;
   scroll-snap-align: center;
   width: 300px;
-  min-width: 270px;
-  max-width: 270px;
+  /* min-width: 270px; */
+  /* max-width: 270px; */
   flex: 0 0 270px;
   position: relative;
   padding-left: 3%;
@@ -138,7 +138,7 @@ body {
   min-height: unset;
   max-height: unset;
   margin: 0;
-  border-radius: 16px;
+  border-radius: 8px;
   position: relative;
   transition: transform 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.35s;
   flex-shrink: 0;
@@ -189,6 +189,10 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.timeline-card-header {
+  margin-bottom: 0.5rem;
 }
 
 .timeline-card:hover .timeline-desc,
@@ -371,4 +375,14 @@ body {
   opacity: 0.85;
   display: block;
   max-width: 900px;
+}
+@media (max-width: 509px) {
+  .site-description {
+    display: none;
+  }
+  .timeline-instructions {
+    font-size: 1rem;
+    margin: 1.5rem auto 0 auto;
+    padding: 0 1rem;
+  }
 }

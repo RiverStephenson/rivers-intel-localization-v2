@@ -4,7 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intel: Sustainability Through the Ages</title>
+  <script>
+    // Ensure <html dir="rtl"> for RTL and <html dir="ltr"> for LTR languages (browser or translation)
+    (function() {
+      var rtlLangs = ['ar', 'he', 'fa', 'ur'];
+      function setDirByLang() {
+        var userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        var html = document.documentElement;
+        var langAttr = html.lang ? html.lang.toLowerCase() : '';
+        var isRtlLang = rtlLangs.some(function(l) { return userLang.startsWith(l) || langAttr.startsWith(l); });
+        html.setAttribute('dir', isRtlLang ? 'rtl' : 'ltr');
+      }
+      document.addEventListener('DOMContentLoaded', setDirByLang);
+      var observer = new MutationObserver(setDirByLang);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    })();
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 
@@ -167,5 +186,215 @@
     </div>
   </section>
   <p class="timeline-instructions">Scroll to view timeline | Hover over cards to learn more!</p>
+
+  <section class="three-column-content container my-5">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title h5">
+              <i class="fa-solid fa-seedling text-success me-2"></i>
+              RISE Strategy
+            </h2>
+            <p class="card-text">
+              Under its RISE (Responsible, Inclusive, Sustainable, Enabling) strategy, 
+              Intel sets ambitious 2030 goals, including driving industry-wide 
+              progress on climate action, water stewardship, and waste reduction.
+            </p>
+            <a href="#" class="btn btn-darkblue">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title h5">
+              <i class="fa-solid fa-handshake text-primary me-2"></i>
+              Commitment
+            </h2>
+            <p class="card-text">
+              In 2022, Intel pledged to achieve net-zero greenhouse gas emissions 
+              (Scope 1 and 2) by 2040. This commitment builds on decades of 
+              environmental initiatives and partnerships across the semiconductor 
+              industry.
+            </p>
+            <a href="#" class="btn btn-darkblue">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title h5">
+              <i class="fa-solid fa-droplet text-info me-2"></i>
+              Water &amp; Waste
+            </h2>
+            <p class="card-text">
+              Intel conserves billions of gallons of water annually and 
+              collaborates with local communities to restore watersheds.
+              Intel also upcycles and recycles materials to reduce waste and 
+              advance a circular economy.
+            </p>
+            <a href="#" class="btn btn-darkblue">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="subscription-section container my-5">
+    <form class="row g-3 justify-content-center align-items-center" id="subscribeForm" novalidate>
+      <div class="col-auto">
+        <h2 class="mb-0 subscription-label">Subscribe to our Newsletter</h2>
+      </div>
+      <div class="col-md-5 col-12">
+        <label for="subscriberEmail" class="form-label visually-hidden">Email address</label>
+        <input type="email" class="form-control" id="subscriberEmail" placeholder="Enter your email" required>
+        <div class="invalid-feedback">
+          Please enter a valid email address.
+        </div>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-darkblue mb-0" id="subscribeBtn" disabled>Subscribe</button>
+      </div>
+    </form>
+  </section>
+
+  <footer class="site-footer mt-5 py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="footer-left text-center text-md-start mb-3 mb-md-0">
+        <span>&copy; 2025 Intel Corporation. All rights reserved.</span>
+      </div>
+      <div class="footer-links text-center text-md-end">
+        <a href="#" class="footer-link">Terms of Use</a>
+        <span class="mx-2 text-muted">|</span>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <span class="mx-2 text-muted">|</span>
+        <a href="#" class="footer-link">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Enable/disable subscribe button based on email validity
+    document.addEventListener('DOMContentLoaded', function() {
+      var emailInput = document.getElementById('subscriberEmail');
+      var btn = document.getElementById('subscribeBtn');
+      var form = document.getElementById('subscribeForm');
+      function validate() {
+        if (emailInput.checkValidity()) {
+          btn.disabled = false;
+          emailInput.classList.remove('is-invalid');
+        } else {
+          btn.disabled = true;
+          // Don't show invalid warning on input, only on blur or submit
+        }
+      }
+      emailInput.addEventListener('input', validate);
+      emailInput.addEventListener('blur', function() {
+        if (!emailInput.checkValidity() && emailInput.value) {
+          emailInput.classList.add('is-invalid');
+        } else {
+          emailInput.classList.remove('is-invalid');
+        }
+      });
+      form.addEventListener('submit', function(e) {
+        if (!emailInput.checkValidity()) {
+          e.preventDefault();
+          emailInput.classList.add('is-invalid');
+        }
+      });
+    });
+  </script>
+  <style>
+    /* ...existing code... */
+    .btn-darkblue {
+      background-color: #183153;
+      color: #fff;
+      border: none;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-darkblue:hover, .btn-darkblue:focus {
+      background-color: #25487a;
+      color: #fff;
+    }
+    .three-column-content .card-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    .three-column-content .btn-darkblue {
+      align-self: center;
+      margin-top: auto;
+      width: 70%;
+      min-width: 120px;
+      max-width: 220px;
+    }
+    .subscription-section form {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .subscription-label {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #22314a;
+      margin-right: 0.5em;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .subscription-section form {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      .subscription-label {
+        margin-bottom: 0.5em;
+        text-align: center;
+      }
+      .subscription-section .btn-darkblue {
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+        min-width: 140px;
+        max-width: 260px;
+      }
+    }
+    .card-title .fa-solid {
+      vertical-align: middle;
+      font-size: 1.2em;
+    }
+    /* Card hover effect for three-column cards */
+    .three-column-content .card {
+      transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+    }
+    .three-column-content .card:hover,
+    .three-column-content .card:focus-within {
+      transform: scale(1.045);
+      box-shadow: 0 8px 32px rgba(24,49,83,0.18);
+      z-index: 2;
+    }
+    .site-footer {
+      background: linear-gradient(90deg, #e3f0ff 0%, #f7fafc 100%);
+      border-top: 1px solid #dbeafe;
+      color: #22314a;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+    }
+    .footer-link {
+      color: #25487a;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .footer-link:hover, .footer-link:focus {
+      color: #183153;
+      text-decoration: underline;
+    }
+    /* ...existing code... */
+  </style>
 </body>
 </html>
